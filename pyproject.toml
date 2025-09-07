@@ -1,0 +1,7 @@
+[project]
+name = "document360-mcp"
+version = "0.1.0"
+description = "A simple Model Context Protocol (MCP) server for accessing Document360 knowledge base content via GET operations. Built with [FastMCP](https://gofastmcp.com/)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
