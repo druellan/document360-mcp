@@ -56,7 +56,7 @@ Set your Document360 API key and other environment variables. You can do this in
 }
 ```
 
-Note: the default base URL is `https://apihub.document360.io`, but some accounts require to use the alternative base url `https://apihub.us.document360.io`.
+Note: the default base URL is `https://apihub.document360.io`, but some accounts require to use the regional base url `https://apihub.us.document360.io`.
 
 ## Usage
 Run the server directly:
@@ -70,7 +70,7 @@ uv run server.py
 ```
 
 ## Exposed MCP Tools
-While there are more specific endpoints in the Document360 API, models seems to behave well with only these: they are able to discover project versions, categories and pages; and to read the page contents.
+Although Document360 exposes more granular endpoints, these are sufficient for a simple consumption workflow: models can discover project versions, enumerate categories and pages, and retrieve full page contents.
 
 - **get_category_page_content**  
   Parameters: `category_id`, `page_id`
