@@ -6,7 +6,7 @@ class Config:
     
     def __init__(self):
         self.api_key = os.getenv("DOCUMENT360_API_KEY", "")
-        self.base_url = os.getenv("DOCUMENT360_BASE_URL", "https://apihub.us.document360.io")
+        self.base_url = os.getenv("DOCUMENT360_BASE_URL", "https://apihub.document360.io")
         self.timeout = int(os.getenv("DOCUMENT360_TIMEOUT", "30"))
         self.langcode = os.getenv("DOCUMENT360_LANGCODE", "en")
         self.only_published = os.getenv("DOCUMENT360_ONLYPUBLISHED", "true")

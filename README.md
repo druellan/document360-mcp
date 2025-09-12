@@ -49,12 +49,14 @@ Set your Document360 API key and other environment variables. You can do this in
       ],
       "env": {
         "DOCUMENT360_API_KEY": "your_api_key_here",
-        "PRODUCTIVE_ORGANIZATION": "https://apihub.document360.io"
+        "DOCUMENT360_BASE_URL": "https://apihub.document360.io"
       }
     }
   }
 }
 ```
+
+Note: the default base URL is `https://apihub.document360.io`, but some accounts require to use the alternative base url `https://apihub.us.document360.io`.
 
 ## Usage
 Run the server directly:
