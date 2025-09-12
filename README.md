@@ -2,6 +2,10 @@
 A very simple Model Context Protocol (MCP) server for accessing Document360 knowledge base content via GET operations. Built with [FastMCP](https://gofastmcp.com/).
 This MCP is intended to be the bare minimun required to be able to find and read pages in Document360's knowledge base.
 
+<a href="https://glama.ai/mcp/servers/@druellan/llmdotfiles-mcp">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@druellan/document360-mcp/badge" alt="Document360 MCP server" />
+</a>
+
 ## Features
 - Get Category by ID
 - Get Category Page Content by ID
@@ -80,3 +84,7 @@ While there are more specific endpoints in the Document360 API, models seems to 
 
 - **get_category**
   Parameters: `category_id`
+
+## License
+
+MIT
