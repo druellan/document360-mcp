@@ -88,6 +88,7 @@ async def search_in_project(project_version_id: str, ctx: Context) -> Dict[str, 
     except Exception as e:
         await ctx.error(f"Unexpected error during project search: {str(e)}")
         raise e
+        
 async def get_category(category_id: str, ctx: Context) -> Dict[str, Any]:
     """Get category by ID from Document360
     

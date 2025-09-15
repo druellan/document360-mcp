@@ -22,7 +22,7 @@ class Document360Client:
         )
     
     async def _request(self, method: str, endpoint: str) -> Dict[str, Any]:
-        """Make HTTP request to Document360 API"""
+        """Make HTTP request to Document360 API using v2 by default."""
         url = f"{config.base_url}/v2{endpoint}"
         
         try:
@@ -53,11 +53,11 @@ class Document360Client:
     
     async def get_category(self, category_id: str) -> Dict[str, Any]:
         """Get category by ID"""
-        return await self._request("GET", f"/categories/{category_id}", "v1")
+        return await self._request("GET", f"/categories/{category_id}")
     
     async def get_category_page_content(self, category_id: str, page_id: str) -> Dict[str, Any]:
         """Get category page content by ID"""
-        return await self._request("GET", f"/categories/{category_id}/pages/{page_id}/content", "v1")
+        return await self._request("GET", f"/categories/{category_id}/pages/{page_id}/content")
     
     async def get_article(self, article_id: str) -> Dict[str, Any]:
         """Get article by ID"""
