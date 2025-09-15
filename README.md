@@ -33,6 +33,7 @@ pip install -r requirements.txt
 
 or using UV
 ```bash
+uv venv
 uv pip install -r requirements.txt
 ```
 
