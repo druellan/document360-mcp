@@ -21,7 +21,7 @@ async def lifespan(server):
 mcp = FastMCP(
     name="Document360 MCP Server",
     instructions="""
-Use this server to access Document360 projects, categories and articles. Search and retrive categories, articles and pages.
+Use this server to access Document360 projects, categories and articles. Search and retrieves categories, articles and pages.
 - If no project_version_id is provided in the context, search for relevant projects using `list_project_versions`. Inform the user if no relevant projects can be found
 - If not article_id is provided, use `search_in_project` to find relevant articles, their IDs and contents
 - While using `search_in_project` pay attention to relevant categoryIds, use `get_category` and `get_category_page_content` if you need to do a deep research on a particular topic
