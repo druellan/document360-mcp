@@ -1,4 +1,6 @@
 from fastmcp import FastMCP, Context
+from typing import Annotated
+from pydantic import Field
 from inc.config import config
 from inc.document360_client import client
 import inc.tools as tools
@@ -36,12 +38,17 @@ Use this server to access Document360 projects, categories and articles. Search 
 )
 
 @mcp.tool
-async def get_category_page_content(category_id: str, page_id: str, ctx: Context) -> dict:
+async def get_category_page_content(
+    category_id: Annotated[str, Field(description="Document360 category ID (UUID string)")],
+    page_id: Annotated[str, Field(description="Document360 page ID (UUID string)")],
+    ctx: Context
+) -> dict:
     """Get category page content by ID from Document360
     
     Args:
-        category_id: The Document360 category ID (e.g., 'rtt2a758-82a7-4dd0-a7c7-0a9ad04881d0')
-        page_id: The Document360 page ID (e.g., 'rtt2a758-82a7-4dd0-a7c7-0a9ad04881d0')
+        category_id: Document360 category ID (UUID string)
+        page_id: Document360 page ID (UUID string)
+        ctx: MCP context for logging and error handling
     
     Returns:
         Full page content including HTML/text content and formatting
@@ -49,11 +56,15 @@ async def get_category_page_content(category_id: str, page_id: str, ctx: Context
     return await tools.get_category_page_content(category_id, page_id, ctx)
 
 @mcp.tool
-async def get_article(article_id: str, ctx: Context) -> dict:
+async def get_article(
+    article_id: Annotated[str, Field(description="Document360 article ID (UUID string)")],
+    ctx: Context
+) -> dict:
     """Get article by ID from Document360
     
     Args:
-        article_id: The Document360 article ID (e.g., 'rtt2a758-82a7-4dd0-a7c7-0a9ad04881d0')
+        article_id: Document360 article ID (UUID string)
+        ctx: MCP context for logging and error handling
     
     Returns:
         Article information including title, content, tags, and metadata
@@ -61,11 +72,15 @@ async def get_article(article_id: str, ctx: Context) -> dict:
     return await tools.get_article(article_id, ctx)
 
 @mcp.tool
-async def search_in_project(project_version_id: str, ctx: Context) -> dict:
+async def search_in_project(
+    project_version_id: Annotated[str, Field(description="Document360 project version ID (UUID string)")],
+    ctx: Context
+) -> dict:
     """Search inside a project version and return related articles/categories in Document360
 
     Args:
-        project_version_id: The project version ID
+        project_version_id: Document360 project version ID (UUID string)
+        ctx: MCP context for logging and error handling
 
     Returns:
         List of hits (articles/categories) from the project version search endpoint
@@ -73,11 +88,15 @@ async def search_in_project(project_version_id: str, ctx: Context) -> dict:
     return await tools.search_in_project(project_version_id, ctx)
 
 @mcp.tool
-async def get_category(category_id: str, ctx: Context) -> dict:
+async def get_category(
+    category_id: Annotated[str, Field(description="Document360 category ID (UUID string)")],
+    ctx: Context
+) -> dict:
     """Get category by ID from Document360
     
     Args:
-        category_id: The Document360 category ID (e.g., 'rtt2a758-82a7-4dd0-a7c7-0a9ad04881d0')
+        category_id: Document360 category ID (UUID string)
+        ctx: MCP context for logging and error handling
     
     Returns:
         Category information including name, description, articles, and metadata

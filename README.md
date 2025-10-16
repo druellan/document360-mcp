@@ -73,20 +73,25 @@ uv run server.py
 ## Exposed MCP Tools
 Although Document360 exposes more granular endpoints, these are sufficient for a simple consumption workflow: models can discover project versions, enumerate categories and pages, and retrieve full page contents.
 
-- **get_category_page_content**  
-  Parameters: `category_id`, `page_id`
+- **get_category_page_content**
+  Parameters:
+  - `category_id` (UUID string): Document360 category ID
+  - `page_id` (UUID string): Document360 page ID
 
-- **get_article**  
-  Parameters: `article_id`
+- **get_article**
+  Parameters:
+  - `article_id` (UUID string): Document360 article ID
 
-- **search_in_project**  
-  Parameters: `project_version_id`
+- **search_in_project**
+  Parameters:
+  - `project_version_id` (UUID string): Document360 project version ID
 
 - **list_project_versions**
   Parameters: none
 
 - **get_category**
-  Parameters: `category_id`
+  Parameters:
+  - `category_id` (UUID string): Document360 category ID
 
 ## License
 

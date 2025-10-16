@@ -6,8 +6,8 @@ async def get_category_page_content(category_id: str, page_id: str, ctx: Context
     """Get category page content by ID from Document360
     
     Args:
-        category_id: The Document360 category ID
-        page_id: The Document360 page ID
+        category_id: Document360 category ID (UUID string)
+        page_id: Document360 page ID (UUID string)
         ctx: MCP context for logging and error handling
         
     Returns:
@@ -36,7 +36,7 @@ async def get_article(article_id: str, ctx: Context) -> Dict[str, Any]:
     """Get article by ID from Document360
     
     Args:
-        article_id: The Document360 article ID
+        article_id: Document360 article ID (UUID string)
         ctx: MCP context for logging and error handling
         
     Returns:
@@ -66,8 +66,8 @@ async def search_in_project(project_version_id: str, ctx: Context) -> Dict[str, 
     """Search inside a project version and return hits
 
     Args:
-        project_version_id: The project version ID to search in
-        ctx: MCP context for logging
+        project_version_id: Document360 project version ID (UUID string)
+        ctx: MCP context for logging and error handling
 
     Returns:
         The raw response from /v2/ProjectVersions/{projectVersionId}/{langCode}, typically contains 'data.hits'
@@ -93,7 +93,7 @@ async def get_category(category_id: str, ctx: Context) -> Dict[str, Any]:
     """Get category by ID from Document360
     
     Args:
-        category_id: The Document360 category ID
+        category_id: Document360 category ID (UUID string)
         ctx: MCP context for logging and error handling
         
     Returns:
@@ -119,14 +119,22 @@ async def get_category(category_id: str, ctx: Context) -> Dict[str, Any]:
         raise e
 
 async def list_project_versions(ctx: Context) -> Dict[str, Any]:
-	try:
-		await ctx.info("Listing all project versions")
-		result = await client.list_project_versions()
-		await ctx.info(f"Found {len(result.get('data', []))} project versions")
-		return result
-	except Document360APIError as e:
-		await ctx.error(f"Document360 API error: {e.message}")
-		raise e
-	except Exception as e:
-		await ctx.error(f"Unexpected error listing project versions: {str(e)}")
-		raise e
+    """List all project versions from Document360
+    
+    Args:
+        ctx: MCP context for logging and error handling
+        
+    Returns:
+        List of project versions from Document360 API
+    """
+    try:
+        await ctx.info("Listing all project versions")
+        result = await client.list_project_versions()
+        await ctx.info(f"Found {len(result.get('data', []))} project versions")
+        return result
+    except Document360APIError as e:
+        await ctx.error(f"Document360 API error: {e.message}")
+        raise e
+    except Exception as e:
+        await ctx.error(f"Unexpected error listing project versions: {str(e)}")
+        raise e
