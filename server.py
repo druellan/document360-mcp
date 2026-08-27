@@ -21,6 +21,7 @@ async def lifespan(server):
 # Initialize FastMCP server
 mcp = FastMCP(
     name="Document360 MCP Server",
+    version="0.1.0",
     instructions="""
 Use this server to access Document360 projects, categories and articles. Search and retrieves categories, articles and pages.
 - If no project_version_id is provided in the context, search for relevant projects using `list_project_versions`. Inform the user if no relevant projects can be found
@@ -31,12 +32,12 @@ Use this server to access Document360 projects, categories and articles. Search 
     """,
     lifespan=lifespan,
     # include_tags={"document360", "api"},
-    on_duplicate_tools="warn",
-    on_duplicate_resources="warn", 
-    on_duplicate_prompts="warn"
+    on_duplicate="warn",
 )
 
-@mcp.tool
+@mcp.tool(
+    annotations={"readOnlyHint": True},
+)
 async def get_category_page_content(
     category_id: Annotated[str, Field(description="Document360 category ID (UUID string)")],
     page_id: Annotated[str, Field(description="Document360 page ID (UUID string)")],
@@ -54,7 +55,9 @@ async def get_category_page_content(
     """
     return await tools.get_category_page_content(category_id, page_id, ctx)
 
-@mcp.tool
+@mcp.tool(
+    annotations={"readOnlyHint": True},
+)
 async def get_article(
     article_id: Annotated[str, Field(description="Document360 article ID (UUID string)")],
     ctx: Context
@@ -70,7 +73,9 @@ async def get_article(
     """
     return await tools.get_article(article_id, ctx)
 
-@mcp.tool
+@mcp.tool(
+    annotations={"readOnlyHint": True},
+)
 async def search_in_project(
     project_version_id: Annotated[str, Field(description="Document360 project version ID (UUID string)")],
     ctx: Context
@@ -86,7 +91,9 @@ async def search_in_project(
     """
     return await tools.search_in_project(project_version_id, ctx)
 
-@mcp.tool
+@mcp.tool(
+    annotations={"readOnlyHint": True},
+)
 async def get_category(
     category_id: Annotated[str, Field(description="Document360 category ID (UUID string)")],
     ctx: Context
@@ -102,7 +109,9 @@ async def get_category(
     """
     return await tools.get_category(category_id, ctx)
 
-@mcp.tool
+@mcp.tool(
+    annotations={"readOnlyHint": True},
+)
 async def list_project_versions(ctx: Context) -> dict:
     """List all project versions from Document360
 
@@ -114,5 +123,10 @@ async def list_project_versions(ctx: Context) -> dict:
     """
     return await tools.list_project_versions(ctx)
 
-if __name__ == "__main__":
+def main():
+    """Entry point for the document360-mcp server"""
     mcp.run()
+
+
+if __name__ == "__main__":
+    main()
