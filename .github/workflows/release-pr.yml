@@ -10,10 +10,11 @@ permissions:
 
 jobs:
   release-pr:
-    # Skip when the push comes from the bot (squash/rebase merge of a release PR)
-    # or when it is the merge commit of a release branch (merge-commit strategy).
+    # Skip when the pushed commit is our own release commit (squash merge keeps the
+    # "Release v" message) or the merge commit of a release branch (merge-commit strategy).
+    # Message-based so it works regardless of who authored the commit.
     if: >-
-      github.event.head_commit.author.username != 'github-actions[bot]' &&
+      !startsWith(github.event.head_commit.message, 'Release v') &&
       !contains(github.event.head_commit.message, 'release/v')
     runs-on: ubuntu-latest
     steps:
@@ -39,6 +40,8 @@ jobs:
         uses: peter-evans/create-pull-request@v8
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          author: "Darío Ruellan <dario.ruellan@gmail.com>"
+          committer: "Darío Ruellan <dario.ruellan@gmail.com>"
           commit-message: "Release v${{ steps.version.outputs.version }}"
           branch: release/v${{ steps.version.outputs.version }}
           title: "Release v${{ steps.version.outputs.version }}"
