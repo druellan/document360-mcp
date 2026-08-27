@@ -20,11 +20,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Set up uv
-        uses: astral-sh/setup-uv@v10
+      - name: Install uv and bump-my-version
+        run: python -m pip install --upgrade pip uv bump-my-version
 
       - name: Bump patch version
-        run: uvx bump-my-version bump patch
+        run: bump-my-version bump patch
 
       - name: Update lockfile
         run: uv lock --no-upgrade
