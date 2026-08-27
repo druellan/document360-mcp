@@ -27,3 +27,8 @@ Thumbs.db
 
 # Others
 *.sqlite3
+
+# Tooling / environment
+.github/
+.opencode/
+document360_mcp.egg-info/
