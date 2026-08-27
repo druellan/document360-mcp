@@ -30,5 +30,8 @@ Thumbs.db
 
 # Tooling / environment
 .github/
+!.github/
+!.github/workflows/
+.github/copilot-instructions.md
 .opencode/
 document360_mcp.egg-info/
