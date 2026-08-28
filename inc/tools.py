@@ -63,7 +63,7 @@ async def get_article(article_id: str, ctx: Context) -> Dict[str, Any]:
 
 
 async def search_in_project(
-    project_version_id: str, query: str = "", hits_per_page: int = 20, ctx: Context = None
+    project_version_id: str, ctx: Context, query: str = "", hits_per_page: int = 20
 ) -> Dict[str, Any]:
     """Search inside a project version using the Document360 server-side search.
 

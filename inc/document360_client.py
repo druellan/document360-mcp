@@ -8,7 +8,7 @@ from inc.config import config
 
 class Document360APIError(Exception):
     """Custom exception for Document360 API errors"""
-    def __init__(self, message: str, status_code: int = None, error_code: str = None):
+    def __init__(self, message: str, status_code: Optional[int] = None, error_code: Optional[str] = None):
         self.message = message
         self.status_code = status_code
         self.error_code = error_code

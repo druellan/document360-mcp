@@ -78,9 +78,9 @@ async def get_article(
 )
 async def search_in_project(
     project_version_id: Annotated[str, Field(description="Document360 project version ID (UUID string)")],
+    ctx: Context,
     query: Annotated[str, Field(description="Free-text phrase searched across articles/categories via the Document360 backend")] = "",
     hits_per_page: Annotated[int, Field(description="Maximum number of ranked results to return (1-1000)")] = 20,
-    ctx: Context = None
 ) -> dict:
     """Search inside a project version and return related articles/categories in Document360
 
@@ -93,7 +93,7 @@ async def search_in_project(
     Returns:
         Ranked list of hits (articles/categories) from the project version search endpoint
     """
-    return await tools.search_in_project(project_version_id, query, hits_per_page, ctx)
+    return await tools.search_in_project(project_version_id, ctx, query, hits_per_page)
 
 @mcp.tool(
     annotations={"readOnlyHint": True},
