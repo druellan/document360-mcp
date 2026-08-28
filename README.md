@@ -85,6 +85,8 @@ Although Document360 exposes more granular endpoints, these are sufficient for a
 - **search_in_project**
   Parameters:
   - `project_version_id` (UUID string): Document360 project version ID
+  - `query` (string, optional): Free-text phrase searched across articles/categories by the Document360 backend
+  - `hits_per_page` (int, optional, default 20): Maximum number of ranked results to return (1-1000)
 
 - **list_project_versions**
   Parameters: none

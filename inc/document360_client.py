@@ -1,5 +1,7 @@
 import httpx
 from typing import Dict, Any, Optional
+from urllib.parse import urlencode
+
 from inc.config import config
 
 # https://apihub.us.document360.io/v2/Articles/eff2a758-82a7-4dd0-a7c7-0a9ad04881d0/en?isForDisplay=false&isPublished=false&appendSASToken=true
@@ -75,13 +77,21 @@ class Document360Client:
     #     """Get list of articles within a project version"""
     #     return await self._request("GET", f"/ProjectVersions/{project_version_id}/articles?langCode={config.langcode}")
 
-    async def search_project_version(self, project_version_id: str) -> Dict[str, Any]:
-        """Search inside a project version (returns hits and metadata)
+    async def search_project_version(
+        self, project_version_id: str, query: str = "", hits_per_page: int = 20
+    ) -> Dict[str, Any]:
+        """Server-side phrase search inside a project version.
 
-        Uses the /v2/ProjectVersions/{projectVersionId}/{langCode} endpoint which returns
-        search hits (articles/categories) for the given project version.
+        GET /v2/ProjectVersions/{projectVersionId}/{langCode} supports a `searchQuery`
+        query parameter that performs the actual ranked search on the Document360
+        backend (with match highlighting). Omit it to list articles. `hitsPerPage`
+        bounds the result set (1-1000).
         """
-        return await self._request("GET", f"/ProjectVersions/{project_version_id}/{config.langcode}")
+        params: Dict[str, Any] = {"hitsPerPage": hits_per_page}
+        if query:
+            params["searchQuery"] = query
+        endpoint = f"/ProjectVersions/{project_version_id}/{config.langcode}?{urlencode(params)}"
+        return await self._request("GET", endpoint)
     
     # async def list_articles_in_category(self, project_version_id: str, category_slug_or_id: str) -> Dict[str, Any]:
     #     """Get list of articles within a specific category

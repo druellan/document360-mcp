@@ -62,23 +62,28 @@ async def get_article(article_id: str, ctx: Context) -> Dict[str, Any]:
         raise e
 
 
-async def search_in_project(project_version_id: str, ctx: Context) -> Dict[str, Any]:
-    """Search inside a project version and return hits
+async def search_in_project(
+    project_version_id: str, query: str = "", hits_per_page: int = 20, ctx: Context = None
+) -> Dict[str, Any]:
+    """Search inside a project version using the Document360 server-side search.
 
     Args:
         project_version_id: Document360 project version ID (UUID string)
+        query: Optional free-text phrase sent to the Document360 search backend
+        hits_per_page: Maximum number of ranked results to return (1-1000)
         ctx: MCP context for logging and error handling
 
     Returns:
-        The raw response from /v2/ProjectVersions/{projectVersionId}/{langCode}, typically contains 'data.hits'
+        A dict with the ranked hits under 'data' and a 'success' flag.
     """
     try:
         await ctx.info(f"Searching in project version: {project_version_id}")
+        if query:
+            await ctx.info(f"Server-side search query: {query}")
 
-        result = await client.search_project_version(project_version_id)
+        result = await client.search_project_version(project_version_id, query, hits_per_page)
 
-        hits = result.get('data', {}).get('hits', [])
-
+        hits = (result.get('data') or {}).get('hits', [])
         await ctx.info(f"Found {len(hits)} hits in project version {project_version_id}")
         return {'data': hits, 'success': True}
 
