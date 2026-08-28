@@ -21,7 +21,7 @@ async def lifespan(server):
 # Initialize FastMCP server
 mcp = FastMCP(
     name="Document360 MCP Server",
-    version="0.1.1",
+    version="0.1.2",
     instructions="""
 Use this server to access Document360 projects, categories and articles. Search and retrieves categories, articles and pages.
 - If no project_version_id is provided in the context, search for relevant projects using `list_project_versions`. Inform the user if no relevant projects can be found
