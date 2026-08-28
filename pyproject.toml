@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "document360-mcp"
-version = "0.1.1"
+version = "0.1.2"
 description = "Model Context Protocol server for Document360 - search, retrieve, and interact with your knowledge base articles, categories, and project versions through AI assistants"
 readme = "README.md"
 license = {text = "MIT"}
@@ -39,7 +39,7 @@ py-modules = ["server"]
 where = ["."]
 
 [tool.bumpversion]
-current_version = "0.1.1"
+current_version = "0.1.2"
 parse = "(?P<major>\\d+)\\.(?P<minor>\\d+)\\.(?P<patch>\\d+)"
 serialize = ["{major}.{minor}.{patch}"]
 search = "{current_version}"
